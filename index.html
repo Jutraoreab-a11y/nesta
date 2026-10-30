@@ -663,7 +663,7 @@
 <div data-view="auxiliaire" class="view view-block" hidden>
   <div class="aux-wrap">
     <div class="space-head" style="padding-bottom:14px;">
-      <div><span class="label">App Auxiliaire</span><h1 style="margin-top:4px;">Bonjour Élodie</h1><p>Vendredi 23 octobre · Lille Centre</p></div>
+      <div><span class="label">App Auxiliaire</span><h1 style="margin-top:4px;">Bonjour Élodie</h1><p>Vendredi 30 octobre · Lille Centre</p></div>
     </div>
 
     <nav class="seg full" role="tablist" aria-label="Menu auxiliaire">
@@ -682,19 +682,6 @@
       </div>
 
       <div class="card">
-        <span class="label">Prochaine intervention</span>
-        <div class="head-row" style="margin-top:8px;">
-          <div style="min-width:0;"><b style="font-size:17px; font-weight:600;">Jean Dupont</b><div class="muted" style="font-size:13px;">12 rue de Béthune, Lille</div><div class="muted num" style="font-size:13px;">13:00 – 16:00 · 3 h</div></div>
-          <span class="pill pill-wait" id="aux-statut">À venir</span>
-        </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px;">
-          <button class="btn btn-forest btn-sm" id="btn-debut">Pointer début</button>
-          <button class="btn btn-gold btn-sm" id="btn-fin" disabled>Pointer fin</button>
-        </div>
-        <div class="geo" id="geo" hidden></div>
-      </div>
-
-      <div class="card">
         <div class="head-row" style="align-items:flex-start;">
           <h2>Journée sélectionnée</h2>
           <div class="day-nav">
@@ -707,16 +694,22 @@
         <p class="muted" id="day-label" style="font-size:13px; margin-top:6px; text-transform:capitalize;"></p>
         <div class="grid-3" style="margin-top:14px;">
           <div class="stat"><span class="label">Heures ce jour</span><b class="num" id="day-h">0 h</b></div>
-          <div class="stat"><span class="label">Clients visités</span><b class="num" id="day-nb">0</b></div>
-          <div class="stat"><span class="label">Tâches du jour</span><b class="num" id="day-tasks">0</b></div>
+          <div class="stat"><span class="label">Interventions</span><b class="num" id="day-nb">0</b></div>
+          <div class="stat"><span class="label">Clients visités</span><b class="num" id="day-cli">0</b></div>
         </div>
         <div id="day-visits" style="margin-top:8px;"></div>
       </div>
 
       <div class="card">
+        <h2>Dîners du jour</h2>
+        <p class="muted" style="font-size:13px; margin:4px 0 6px;">Menu prévu pour chaque client visité ce jour.</p>
+        <div id="day-diners"></div>
+      </div>
+
+      <div class="card">
         <div class="head-row">
           <h2>Ma rémunération · octobre 2026</h2>
-          <span class="pill pill-info" style="background:var(--sage); color:var(--forest);">Estimation</span>
+          <span class="pill" style="background:var(--sage); color:var(--forest);">Estimation</span>
         </div>
         <div style="margin-top:10px;">
           <div class="fin-row"><span>Heures effectuées ce mois</span><b class="num" id="pay-h">64 h</b></div>
@@ -726,15 +719,16 @@
           <div class="fin-row"><span><b>Salaire net estimé à verser</b></span><span class="fin-net num" id="pay-net">624,00 €</span></div>
         </div>
         <div class="mini-grid">
-          <div><small>Moyenne d'interventions par jour</small><b class="num" id="pay-moy">1,4</b></div>
-          <div><small>Clients uniques gérés</small><b class="num" id="pay-uniq">3</b></div>
+          <div><small>Interventions par jour travaillé</small><b class="num" id="pay-moy">1,4</b></div>
+          <div><small>Clients par jour travaillé</small><b class="num" id="pay-cpd">1,2</b></div>
+          <div><small>Clients suivis ce mois</small><b class="num" id="pay-uniq">3</b></div>
         </div>
         <p class="fin-note">Montants indicatifs. Le taux de cotisations est une moyenne, le bulletin de paie fait foi.</p>
       </div>
 
       <div class="card">
         <div class="head-row">
-          <h2>Notifications</h2>
+          <h2>Notifications urgentes</h2>
           <span class="muted" style="font-size:13px;" id="notif-count"></span>
         </div>
         <div id="aux-notifs" class="stack-sm" style="margin-top:12px;"></div>
@@ -753,6 +747,19 @@
     <div data-aux-panel="planning" class="stack" hidden style="margin-top:16px;">
       <div class="card">
         <div class="head-row">
+          <h2>Pointage</h2>
+          <span class="pill pill-wait" id="aux-statut">À venir</span>
+        </div>
+        <p class="muted" style="font-size:14px; margin:8px 0 14px;">Jean Dupont · 13:00 – 16:00 · 3 h</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <button class="btn btn-forest btn-sm" id="btn-debut">Pointer début</button>
+          <button class="btn btn-gold btn-sm" id="btn-fin" disabled>Pointer fin</button>
+        </div>
+        <div class="geo" id="geo" hidden></div>
+      </div>
+
+      <div class="card">
+        <div class="head-row">
           <h2>Planning du jour</h2>
           <span class="muted" style="font-size:13px; text-transform:capitalize;" id="gantt-day">7 h – 20 h</span>
         </div>
@@ -766,7 +773,7 @@
       </div>
     </div>
 
-    <!-- Cahier de liaison -->
+<!-- Cahier de liaison -->
     <div data-aux-panel="cahier" class="stack" hidden style="margin-top:16px;">
       <div class="card stack-sm" style="gap:16px;">
         <div>
@@ -839,58 +846,88 @@
   </nav>
 
   <!-- Contrat -->
+  <style>
+    .plan-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+    .plan-table th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); padding: 8px 6px; border-bottom: 1px solid var(--line); }
+    .plan-table td { padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+    .plan-table tr.we td { background: #FBF7EE; }
+    .we-badge { display: inline-block; margin-left: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 2px 6px; border-radius: 999px; background: var(--gold-light); color: var(--forest); }
+    .slot { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .slot input[type="checkbox"] { accent-color: var(--forest); width: 16px; height: 16px; margin: 0; }
+    .slot input.hrs { width: 62px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 10px; font: inherit; font-size: 14px; background: var(--white); }
+    .slot input.hrs:disabled { opacity: .4; }
+    .maj-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    @media (max-width: 520px) { .maj-row { grid-template-columns: 1fr; } }
+  </style>
   <div data-fam-panel="contrat" class="stack" style="margin-top:16px;">
     <div class="card">
-      <div class="head-row"><h2>Configurer le contrat CESU</h2><span class="muted" style="font-size:13px;">Modifiable à tout moment</span></div>
-
-      <div style="margin-top:16px;">
-        <span class="field-label">Créneaux souhaités</span>
-        <div class="check-row" style="margin-top:8px;">
-          <label class="check"><input type="checkbox" data-slot="Matin" checked> Matin</label>
-          <label class="check"><input type="checkbox" data-slot="Midi"> Midi</label>
-          <label class="check"><input type="checkbox" data-slot="Soir" checked> Soir</label>
-        </div>
-        <p class="muted" style="font-size:13px; margin-top:8px;" id="slots-recap"></p>
+      <div class="head-row"><h2>1. Planning hebdomadaire</h2><span class="muted" style="font-size:13px;">Cochez les créneaux, indiquez les heures</span></div>
+      <div class="scroll-x" style="margin-top:12px;">
+        <table class="plan-table">
+          <thead><tr><th>Jour</th><th>Matin</th><th>Midi</th><th>Soir</th><th style="text-align:right;">Total</th></tr></thead>
+          <tbody id="plan-body"></tbody>
+        </table>
       </div>
-
-      <div style="margin-top:18px;">
-        <div class="slider-top">
-          <label for="f-heures" class="muted">Heures mensuelles souhaitées</label>
-          <output id="f-heures-out" for="f-heures" style="font-family:'Playfair Display',serif; font-size:26px; font-weight:600; color:var(--forest);">60 h</output>
-        </div>
-        <input id="f-heures" type="range" min="1" max="120" value="60" style="margin:10px 0 4px;">
+      <div class="check-row" style="margin-top:14px;">
+        <button class="btn btn-line btn-sm" id="btn-tout-pareil">Appliquer le lundi à tous les jours</button>
+        <button class="btn btn-ghost btn-sm" id="btn-reset-plan-fam">Modèle de base</button>
       </div>
+      <p class="muted" style="font-size:13px; margin-top:12px;" id="plan-recap"></p>
+    </div>
 
-      <div style="margin-top:18px;">
-        <label class="field-label" for="f-fin">Mode de financement et de versement</label>
-        <select id="f-fin" class="wide" style="margin-top:6px;">
-          <option value="cesu">Chèque CESU préfinancé</option>
-          <option value="apa">Virement APA (allocation autonomie)</option>
-          <option value="mixte">APA versée + CESU préfinancé</option>
-        </select>
-        <div id="apa-box" style="margin-top:12px;">
-          <label class="field-label" for="f-apa">Montant APA mensuel attendu (€)</label>
-          <input id="f-apa" class="input" type="number" min="0" step="10" value="300" style="margin-top:6px;">
-        </div>
+    <div class="card">
+      <h2>2. Majorations du week-end</h2>
+      <p class="muted" style="font-size:13px; margin:4px 0 0;">Le dimanche est majoré de 25 % selon le Code du travail (particuliers employeurs). Le samedi est une majoration commerciale, modifiable. Les jours fériés ne sont pas encore pris en compte.</p>
+      <div class="maj-row">
+        <div><label class="field-label" for="maj-sam">Samedi (%)</label><input id="maj-sam" class="input" type="number" min="0" max="100" step="5" value="10" style="margin-top:6px;"></div>
+        <div><label class="field-label" for="maj-dim">Dimanche (%)</label><input id="maj-dim" class="input" type="number" min="0" max="100" step="5" value="25" style="margin-top:6px;"></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="head-row"><h2>Ventilation financière</h2><span class="muted" style="font-size:13px;" id="v-titre">Pour 60 h / mois</span></div>
+      <h2>3. Aide et APA</h2>
+      <div class="maj-row" style="margin-top:12px;">
+        <div><label class="field-label" for="f-apa">APA mensuelle attendue (€)</label><input id="f-apa" class="input" type="number" min="0" step="10" value="300" style="margin-top:6px;"></div>
+        <div><label class="field-label" for="f-autre">Autre aide (€ par mois)</label><input id="f-autre" class="input" type="number" min="0" step="10" value="0" style="margin-top:6px;"></div>
+      </div>
+      <p class="fin-note">L'aide est plafonnée au coût après crédit d'impôt.</p>
+    </div>
+
+    <div class="card">
+      <h2>4. Mode de versement</h2>
+      <select id="f-fin" class="wide" style="margin-top:10px;">
+        <option value="cesu">Chèque CESU préfinancé</option>
+        <option value="apa">Virement APA (allocation autonomie)</option>
+        <option value="mixte">APA versée + CESU préfinancé</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <div class="head-row"><h2>5. Soldes du contrat</h2><span class="muted" style="font-size:13px;" id="v-titre">Par mois</span></div>
       <div style="margin-top:10px;">
-        <div class="fin-row"><span>Coût TTC mensuel <small>avant crédit d'impôt</small></span><b class="num" id="v-ttc">0,00 €</b></div>
+        <div class="fin-row"><span>Heures par mois</span><b class="num" id="v-h">0 h</b></div>
+        <div class="fin-row"><span>Majoration du week-end incluse <small>(déjà dans le coût)</small></span><b class="num" id="v-maj">0,00 €</b></div>
+        <div class="fin-row"><span>Coût TTC mensuel</span><b class="num" id="v-ttc">0,00 €</b></div>
         <div class="fin-row"><span>Avance immédiate du crédit d'impôt <small>(−50 %)</small></span><b class="num" id="v-ci">0,00 €</b></div>
         <div class="fin-row"><span>Coût après crédit d'impôt</span><b class="num" id="v-net">0,00 €</b></div>
-        <div class="fin-row"><span id="v-aide-label">Part prise en charge par l'APA</span><b class="num" id="v-aide">0,00 €</b></div>
-        <div class="fin-row"><span><b>Restant à la charge de la famille</b></span><span class="fin-reste num" id="v-reste">0,00 €</span></div>
+        <div class="fin-row"><span id="v-aide-label">Aide APA et autres aides</span><b class="num" id="v-aide">0,00 €</b></div>
+        <div class="fin-row"><span><b>Part restant à la charge de la famille</b></span><span class="fin-reste num" id="v-reste">0,00 €</span></div>
       </div>
-      <p class="fin-note">L'aide APA est plafonnée au coût après crédit d'impôt. Calcul indicatif, à confirmer avec votre conseil départemental.</p>
+      <p class="fin-note">Calcul indicatif, à confirmer avec votre conseil départemental et votre conseiller fiscal.</p>
+    </div>
+
+    <div class="card" style="border-left:4px solid var(--gold);">
+      <span class="label">Prélèvement automatique</span>
+      <h2 style="margin-top:6px;" id="prelev-date">25 novembre 2026</h2>
+      <p class="muted" style="font-size:14px; margin-top:6px;" id="prelev-txt"></p>
+      <p class="muted" style="font-size:14px; margin-top:6px;">Montant prélevé : <b class="num" id="prelev-montant" style="color:var(--forest);">0,00 €</b></p>
+      <p class="muted" style="font-size:13px; margin-top:8px;">Le prélèvement a toujours lieu avant le premier jour de prestation du mois concerné.</p>
     </div>
 
     <div class="card">
-      <div class="head-row"><h2>Transparence tarifaire</h2><span class="muted" style="font-size:13px;">Détail à chaque étape</span></div>
+      <div class="head-row"><h2>Transparence tarifaire</h2><span class="muted" style="font-size:13px;">Tarif de base, hors majoration</span></div>
       <table class="price-table" style="margin-top:12px;">
-        <thead><tr><th>Poste</th><th>Par heure</th><th id="f-col-mois">Pour 60 h</th></tr></thead>
+        <thead><tr><th>Poste</th><th>Par heure</th><th id="f-col-mois">Pour 0 h</th></tr></thead>
         <tbody>
           <tr><td>Tarif HT</td><td id="p-ht-h"></td><td id="p-ht-m"></td></tr>
           <tr><td>TVA (5,5 %)</td><td id="p-tva-h"></td><td id="p-tva-m"></td></tr>
@@ -900,13 +937,6 @@
         </tbody>
       </table>
       <p class="fine" style="font-size:12px; color:var(--muted); margin-top:12px;">Calcul indicatif. Le crédit d'impôt porte sur le montant TTC réellement payé.</p>
-    </div>
-
-    <div class="card" style="border-left:4px solid var(--gold);">
-      <span class="label">Prélèvement automatique</span>
-      <h2 style="margin-top:6px;" id="prelev-date">25 octobre 2026</h2>
-      <p class="muted" style="font-size:14px; margin-top:6px;" id="prelev-txt"></p>
-      <p class="muted" style="font-size:13px; margin-top:8px;">Le prélèvement a toujours lieu avant le premier jour de prestation du mois concerné. Aucune prestation n'est facturée d'avance.</p>
     </div>
 
     <div class="card">
@@ -920,7 +950,7 @@
     </div>
   </div>
 
-  <!-- Messagerie -->
+<!-- Messagerie -->
   <div data-fam-panel="messagerie" class="stack" hidden style="margin-top:16px;">
     <div class="card">
       <div class="head-row">
@@ -1326,8 +1356,8 @@ function bindSimAccueil() {
 bindSimAccueil();
 
 /* ===================== DATES & CONSTANTES ===================== */
-const TODAY = '2026-10-23';
-const TODAY_D = new Date(2026, 9, 23);
+const TODAY = '2026-10-30';
+const TODAY_D = new Date(2026, 9, 30);
 const keyOf = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const parseKey = (k) => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); };
 const shiftKey = (k, n) => { const d = parseKey(k); d.setDate(d.getDate() + n); return keyOf(d); };
@@ -1397,6 +1427,12 @@ function setAuxTab(name) {
 document.querySelectorAll('[data-aux-tab]').forEach(b => b.addEventListener('click', () => setAuxTab(b.dataset.auxTab)));
 
 /* Journée sélectionnée */
+const DINERS = {
+  c1: 'Soupe de légumes sans sel, omelette aux herbes, compote de pommes',
+  c2: 'Poulet vapeur, légumes verts, yaourt nature (repas fractionné)',
+  c3: 'Potage, filet de colin, purée maison, fromage blanc'
+};
+const CLIENT_JOURS_MOIS = 21;   // total (jour × client suivi) sur le mois
 function setDay(k) {
   aux.day = k;
   $('aux-date').value = k;
@@ -1406,17 +1442,16 @@ function setDay(k) {
 function renderDay() {
   const items = scheduleFor(aux.day).slice().sort((a, b) => a.debut - b.debut);
   const h = sum(items.map(i => i.fin - i.debut));
-  const nbClients = new Set(items.map(i => i.clientId)).size;
-  const nbTaches = sum(items.map(i => i.taches.length));
+  const clients = [...new Set(items.map(i => i.clientId))];
   $('day-label').textContent = fmtJour(aux.day);
   $('day-h').textContent = fmtHeures(h);
-  $('day-nb').textContent = nbClients;
-  $('day-tasks').textContent = nbTaches;
+  $('day-nb').textContent = items.length;
+  $('day-cli').textContent = clients.length;
+
   const box = $('day-visits');
   box.innerHTML = '';
   if (!items.length) {
     box.innerHTML = '<p class="muted" style="font-size:14px; padding:12px 0;">Aucune intervention prévue ce jour.</p>';
-    return;
   }
   items.forEach(i => {
     const row = document.createElement('div');
@@ -1436,6 +1471,22 @@ function renderDay() {
     row.appendChild(pill);
     box.appendChild(row);
   });
+
+  const dBox = $('day-diners');
+  dBox.innerHTML = '';
+  if (!clients.length) {
+    dBox.innerHTML = '<p class="muted" style="font-size:14px; padding:6px 0;">Aucun dîner à prévoir ce jour.</p>';
+    return;
+  }
+  clients.forEach(cid => {
+    const c = DB.clients.find(x => x.id === cid);
+    const row = document.createElement('div');
+    row.className = 'visit';
+    row.innerHTML = `<div style="min-width:0;"><b></b><small class="muted" style="display:block; font-size:13px;"></small></div>`;
+    row.querySelector('b').textContent = c ? c.nom : cid;
+    row.querySelector('small').textContent = DINERS[cid] || 'Menu non renseigné';
+    dBox.appendChild(row);
+  });
 }
 $('aux-date').addEventListener('change', e => { if (e.target.value) setDay(e.target.value); });
 $('day-prev').addEventListener('click', () => setDay(shiftKey(aux.day, -1)));
@@ -1454,6 +1505,7 @@ function renderPay() {
   $('pay-cot').textContent = '− ' + fmt2(cot / 100) + ' €';
   $('pay-net').textContent = fmt2(net / 100) + ' €';
   $('pay-moy').textContent = fmtN((INTERV_MOIS + finis) / JOURS_MOIS);
+  $('pay-cpd').textContent = fmtN(CLIENT_JOURS_MOIS / JOURS_MOIS);
   $('pay-uniq').textContent = mesClients().length;
 }
 
@@ -1739,62 +1791,105 @@ function renderDossierAux() {
 $('dos-aux-client').addEventListener('change', renderDossierAux);
 
 /* ===================== FAMILLE ===================== */
-const fam = { heures: 60, fin: 'cesu', apa: 300 };
-const SLOTS = { Matin: '8h – 12h', Midi: '12h – 14h', Soir: '17h – 21h' };
+const JOURS = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+const CRENEAUX = ['Matin', 'Midi', 'Soir'];
+const SEMAINES_PAR_MOIS = 52 / 12;
+const fam = { plan: null, majSam: 10, majDim: 25, apa: 300, autre: 0, fin: 'cesu' };
+const eurC = (c) => fmt2(c / 100) + ' €';
 
-function setFamTab(name) {
-  document.querySelectorAll('[data-fam-tab]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.famTab === name)));
-  document.querySelectorAll('[data-fam-panel]').forEach(p => { p.hidden = p.dataset.famPanel !== name; });
+function planDefaut() {
+  const p = JOURS.map(() => ({ Matin: { on: false, h: 2 }, Midi: { on: false, h: 1 }, Soir: { on: false, h: 1 } }));
+  for (let i = 0; i < 5; i++) { p[i].Matin.on = true; p[i].Soir.on = true; }
+  p[5].Matin.on = true;
+  return p;
 }
-document.querySelectorAll('[data-fam-tab]').forEach(b => b.addEventListener('click', () => setFamTab(b.dataset.famTab)));
+function jourTotal(jour) { return CRENEAUX.reduce((s, c) => s + (jour[c].on ? jour[c].h : 0), 0); }
+function majPour(i) { return i === 5 ? fam.majSam : i === 6 ? fam.majDim : 0; }
 
-function renderSlots() {
-  const chosen = [...document.querySelectorAll('[data-slot]')].filter(c => c.checked).map(c => c.dataset.slot);
-  $('slots-recap').textContent = chosen.length
-    ? 'Créneaux retenus : ' + chosen.map(s => `${s} (${SLOTS[s]})`).join(' · ')
-    : 'Aucun créneau sélectionné : l’intervenante ne sera pas planifiée.';
+function renderPlanTable() {
+  const body = $('plan-body');
+  body.innerHTML = '';
+  JOURS.forEach((nom, i) => {
+    const tr = document.createElement('tr');
+    if (i >= 5) tr.classList.add('we');
+    const cells = CRENEAUX.map(s => {
+      const st = fam.plan[i][s];
+      return `<td><label class="slot"><input type="checkbox" data-d="${i}" data-s="${s}" ${st.on ? 'checked' : ''} aria-label="${s}, ${nom}"><input type="number" class="hrs" min="0" max="8" step="0.5" value="${st.h}" data-d="${i}" data-s="${s}" aria-label="Heures, ${s}, ${nom}" ${st.on ? '' : 'disabled'}><span>h</span></label></td>`;
+    }).join('');
+    tr.innerHTML = `<td style="font-weight:600; white-space:nowrap;">${nom}${i >= 5 ? '<span class="we-badge">Week-end</span>' : ''}</td>${cells}<td class="num" style="text-align:right;" data-tot="${i}"></td>`;
+    body.appendChild(tr);
+  });
 }
-document.querySelectorAll('[data-slot]').forEach(c => c.addEventListener('change', renderSlots));
+$('plan-body').addEventListener('change', e => {
+  const t = e.target;
+  if (t.type !== 'checkbox') return;
+  const i = Number(t.dataset.d), s = t.dataset.s;
+  fam.plan[i][s].on = t.checked;
+  const num = t.parentElement.querySelector('input.hrs');
+  num.disabled = !t.checked;
+  updateContrat();
+});
+$('plan-body').addEventListener('input', e => {
+  const t = e.target;
+  if (t.type !== 'number') return;
+  const i = Number(t.dataset.d), s = t.dataset.s;
+  let v = Math.min(8, Math.max(0, Math.round((Number(t.value) || 0) * 2) / 2));
+  fam.plan[i][s].h = v;
+  updateContrat();
+});
+$('btn-tout-pareil').addEventListener('click', () => {
+  const modele = JSON.parse(JSON.stringify(fam.plan[0]));
+  fam.plan = JOURS.map(() => JSON.parse(JSON.stringify(modele)));
+  renderPlanTable();
+  updateContrat();
+  toast('Le modèle du lundi est appliqué à toute la semaine');
+});
+$('btn-reset-plan-fam').addEventListener('click', () => {
+  fam.plan = planDefaut();
+  renderPlanTable();
+  updateContrat();
+});
+
+/* Calcul du contrat : heures, majorations, soldes */
+function contratCalc() {
+  let hSem = 0, hSemPond = 0, hWe = 0;
+  fam.plan.forEach((jour, i) => {
+    const tot = jourTotal(jour);
+    hSem += tot;
+    hSemPond += tot * (1 + majPour(i) / 100);
+    if (i >= 5) hWe += tot;
+  });
+  const hMois = hSem * SEMAINES_PAR_MOIS;
+  const hMoisPond = hSemPond * SEMAINES_PAR_MOIS;
+  const ttc = Math.round(hMoisPond * TTC_H);
+  const majCents = Math.round((hMoisPond - hMois) * TTC_H);
+  const ci = Math.round(ttc / 2);
+  const net = ttc - ci;
+  const aides = Math.min(Math.round((fam.apa + fam.autre) * 100), net);
+  const reste = net - aides;
+  return { hSem, hMois, hWe, ttc, majCents, ci, net, aides, reste };
+}
 
 function renderPriceTable() {
-  const h = fam.heures;
+  const h = contratCalc().hMois;
   const htH = 2500;
-  const tvaH = Math.round(htH * 0.055);   // 138 c
-  const ttcH = htH + tvaH;                 // 2638 c
-  const ciH = Math.round(ttcH / 2);        // 1319 c
-  const netH = ttcH - ciH;                 // 1319 c
-  const eur = (c) => fmt2(c / 100) + ' €';
-  $('p-ht-h').textContent = eur(htH);
-  $('p-tva-h').textContent = eur(tvaH);
-  $('p-ttc-h').textContent = eur(ttcH);
-  $('p-ci-h').textContent = '− ' + eur(ciH);
-  $('p-net-h').textContent = eur(netH);
-  $('p-ht-m').textContent = eur(htH * h);
-  $('p-tva-m').textContent = eur(tvaH * h);
-  $('p-ttc-m').textContent = eur(ttcH * h);
-  $('p-ci-m').textContent = '− ' + eur(ciH * h);
-  $('p-net-m').textContent = eur(netH * h);
-  $('f-col-mois').textContent = `Pour ${h} h`;
-  $('f-heures-out').textContent = h + ' h';
+  const tvaH = Math.round(htH * 0.055);
+  const ttcH = htH + tvaH;
+  const ciH = Math.round(ttcH / 2);
+  const netH = ttcH - ciH;
+  $('p-ht-h').textContent = eurC(htH);
+  $('p-tva-h').textContent = eurC(tvaH);
+  $('p-ttc-h').textContent = eurC(ttcH);
+  $('p-ci-h').textContent = '− ' + eurC(ciH);
+  $('p-net-h').textContent = eurC(netH);
+  $('p-ht-m').textContent = eurC(htH * h);
+  $('p-tva-m').textContent = eurC(tvaH * h);
+  $('p-ttc-m').textContent = eurC(ttcH * h);
+  $('p-ci-m').textContent = '− ' + eurC(ciH * h);
+  $('p-net-m').textContent = eurC(netH * h);
+  $('f-col-mois').textContent = `Pour ${fmtN(h)} h`;
 }
 
-function renderVentilation() {
-  const h = fam.heures;
-  const ttc = TTC_H * h;
-  const ci = CI_H * h;
-  const net = NET_H * h;                                   // coût après crédit d'impôt
-  const aide = fam.fin === 'cesu' ? 0 : Math.min(Math.round(fam.apa * 100), net);
-  const reste = net - aide;
-  $('v-titre').textContent = `Pour ${h} h / mois`;
-  $('v-ttc').textContent = fmt2(ttc / 100) + ' €';
-  $('v-ci').textContent = '− ' + fmt2(ci / 100) + ' €';
-  $('v-net').textContent = fmt2(net / 100) + ' €';
-  $('v-aide').textContent = (aide ? '− ' : '') + fmt2(aide / 100) + ' €';
-  $('v-aide-label').textContent = fam.fin === 'cesu' ? 'Aide APA (non mobilisée pour ce mode)' : 'Part prise en charge par l’APA';
-  $('v-reste').textContent = fmt2(reste / 100) + ' €';
-}
-
-/* Prochain prélèvement : le 25 précède le mois des prestations */
 function prochainPrelevement() {
   const d = new Date(TODAY_D.getFullYear(), TODAY_D.getMonth(), 25);
   if (TODAY_D.getDate() > 25) d.setMonth(d.getMonth() + 1);
@@ -1804,22 +1899,48 @@ function prochainPrelevement() {
     mois: couvre.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })
   };
 }
-function renderPrelev() {
+
+function updateContrat() {
+  const c = contratCalc();
+  fam.plan.forEach((jour, i) => {
+    const cell = document.querySelector(`[data-tot="${i}"]`);
+    if (cell) cell.textContent = fmtHeures(jourTotal(jour));
+  });
+  $('plan-recap').textContent = `${fmtN(c.hSem)} h par semaine, soit environ ${fmtN(c.hMois)} h par mois, dont ${fmtN(c.hWe)} h le week-end.`;
+  $('v-h').textContent = fmtHeures(c.hMois);
+  $('v-maj').textContent = '+ ' + eurC(c.majCents);
+  $('v-ttc').textContent = eurC(c.ttc);
+  $('v-ci').textContent = '− ' + eurC(c.ci);
+  $('v-net').textContent = eurC(c.net);
+  $('v-aide-label').textContent = fam.apa + fam.autre > 0 ? 'Aide APA et autres aides' : 'Aides (aucune saisie)';
+  $('v-aide').textContent = (c.aides ? '− ' : '') + eurC(c.aides);
+  $('v-reste').textContent = eurC(c.reste);
   const p = prochainPrelevement();
   $('prelev-date').textContent = p.date;
   $('prelev-txt').textContent = `Prochain prélèvement le ${p.date}, avant le début des prestations de ${p.mois}.`;
+  $('prelev-montant').textContent = eurC(c.reste);
+  renderPriceTable();
 }
 
-$('f-heures').addEventListener('input', e => { fam.heures = Number(e.target.value); renderPriceTable(); renderVentilation(); });
-$('f-fin').addEventListener('change', e => {
-  fam.fin = e.target.value;
-  $('apa-box').hidden = fam.fin === 'cesu';
-  renderVentilation();
-});
-$('f-apa').addEventListener('input', e => { fam.apa = Math.max(0, Number(e.target.value) || 0); renderVentilation(); });
+function setFamTab(name) {
+  document.querySelectorAll('[data-fam-tab]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.famTab === name)));
+  document.querySelectorAll('[data-fam-panel]').forEach(p => { p.hidden = p.dataset.famPanel !== name; });
+}
+document.querySelectorAll('[data-fam-tab]').forEach(b => b.addEventListener('click', () => setFamTab(b.dataset.famTab)));
+
+function bindMajAides() {
+  const bind = (id, fn) => $(id).addEventListener('input', e => { fn(Math.max(0, Number(e.target.value) || 0)); updateContrat(); });
+  bind('maj-sam', v => { fam.majSam = Math.min(100, v); });
+  bind('maj-dim', v => { fam.majDim = Math.min(100, v); });
+  bind('f-apa', v => { fam.apa = v; });
+  bind('f-autre', v => { fam.autre = v; });
+}
+bindMajAides();
+$('f-fin').addEventListener('change', e => { fam.fin = e.target.value; updateContrat(); });
 $('contrat-save').addEventListener('click', () => {
+  const c = contratCalc();
   const p = prochainPrelevement();
-  $('contrat-msg').textContent = `Contrat enregistré · prélèvement prévu le ${p.date}.`;
+  $('contrat-msg').textContent = `Contrat enregistré · prélèvement de ${eurC(c.reste)} prévu le ${p.date}.`;
   toast('Contrat enregistré');
 });
 
@@ -1938,14 +2059,13 @@ function renderFactures() {
 }
 
 function renderFamille() {
-  renderPriceTable();
-  renderVentilation();
-  renderPrelev();
-  renderSlots();
+  renderPlanTable();
+  updateContrat();
   renderThread();
   renderFactures();
   fillDossierForm();
-  setFamTab(document.querySelector('[data-fam-tab][aria-pressed="true"]') ? document.querySelector('[data-fam-tab][aria-pressed="true"]').dataset.famTab : 'contrat');
+  const actif = document.querySelector('[data-fam-tab][aria-pressed="true"]');
+  setFamTab(actif ? actif.dataset.famTab : 'contrat');
 }
 
 /* Télémétrie */
@@ -2166,6 +2286,7 @@ $('f-ville').addEventListener('change', e => { adm.ville = e.target.value; rende
 buildMonthSelect();
 setAuxTab('dashboard');
 setFamTab('contrat');
+fam.plan = planDefaut();
 $('aux-date').value = TODAY;
 renderAuxClients();
 renderAuxHistory();
@@ -2175,12 +2296,11 @@ renderPool();
 renderDay();
 renderPay();
 renderGantt();
-renderPriceTable();
-renderVentilation();
-renderPrelev();
-renderSlots();
+renderPlanTable();
+updateContrat();
 renderFactures();
 </script>
 </body>
 </html>
+
 </html>
